@@ -1,15 +1,91 @@
 // Iteration 1: All directors? - Get the array of all directors.
+function getAllDirectors(arr) {
+  const directors = arr.map(function (value) {
+    return value.director;
+  });
+  return directors;
+}
+
 // _Bonus_: It seems some of the directors had directed multiple movies so they will pop up multiple times in the array of directors. How could you "clean" a bit this array and make it unified (without duplicates)?
 
 // Iteration 2: Steven Spielberg. The best? - How many drama movies did STEVEN SPIELBERG direct?
+function howManyMovies(arr) {
+  let moviesFrom = 0;
+  arr.filter(function (value) {
+    if (
+      value.director === 'Steven Spielberg' &&
+      value.genre.includes('Drama')
+    ) {
+      moviesFrom++;
+    }
+  });
+  return moviesFrom;
+}
 
 // Iteration 3: All rates average - Get the average of all rates with 2 decimals
+function ratesAverage(arr) {
+  const averageRate = arr.reduce((average, value) => {
+    if (typeof value.rate !== 'number') {
+      value.rate = 0;
+      return average + value.rate / arr.length;
+    } else {
+      return average + value.rate / arr.length;
+    }
+  }, 0);
+  const a = 10 ** 2;
+  return Math.round(averageRate * a) / a;
+}
 
 // Iteration 4: Drama movies - Get the average of Drama Movies
+function dramaMoviesRate(arr) {
+  const dramaMovies = arr.filter(function (value) {
+    return value.genre.includes('Drama');
+  });
+
+  const dramaMoviesAverage = dramaMovies.reduce((average, value) => {
+    if (typeof value.rate !== 'number') {
+      value.rate = 0;
+      return average + value.rate / dramaMovies.length;
+    } else {
+      return average + value.rate / dramaMovies.length;
+    }
+  }, 0);
+  const a = 10 ** 2;
+  return Math.round(dramaMoviesAverage * a) / a;
+}
 
 // Iteration 5: Ordering by year - Order by year, ascending (in growing order)
+function orderByYear(arr) {
+  const cloneYears = [...arr];
+
+  cloneYears.sort(function (first, second) {
+    if (first.year > second.year) {
+      return 1;
+    } else if (first.year < second.year) {
+      return -1;
+    } else if (first.title.localeCompare(second.title)) {
+      return -1;
+    } else if (second.title.localeCompare(first.title)) {
+      return 1;
+    }
+  });
+  return cloneYears;
+}
 
 // Iteration 6: Alphabetic Order - Order by title and print the first 20 titles
+function orderAlphabetically(arr) {
+  const cloneTitle = [...arr];
+
+  cloneTitle.sort(function (first, second) {
+    return first.title.localeCompare(second.title);
+  });
+
+  const justTitles = cloneTitle.map(function (value) {
+    return value.title;
+  });
+
+  return justTitles.slice(0, 20);
+}
 
 // BONUS - Iteration 7: Time Format - Turn duration of the movies from hours to minutes
 
